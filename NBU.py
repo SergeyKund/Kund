@@ -1,5 +1,6 @@
 import requests
 from datetime import date
+
 class NBU:
     def today_1(self):
         today = date.today()
@@ -24,14 +25,15 @@ class NBU:
                         cc = item.get('cc')
                         content = f'{txt}({cc}) to UAH: {rate}'
                         file.write(content + '\n')
-                    elif not self.today_1() in item.get('exchangedate', ''):
+                    else:
                         txt = item.get('txt')
                         rate = item.get('rate')
                         cc = item.get('cc')
                         content = f'{txt}({cc}) to UAH: {rate}'
+                        file.write(content + '\n')
+        file.close()
         return file
 
 nbu = NBU()
 nbu.examination()
-
 
